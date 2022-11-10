@@ -1,11 +1,11 @@
-import requests
+# import requests
 from gpiozero import Button
 from datetime import datetime, timedelta
-from src import settings
+# from src import settings
 
-root_url = settings.HOST_URL
-button_gpio_pin=18
-longpress_threshold=5 # ms
+# root_url = settings.HOST_URL
+# button_gpio_pin=18
+# longpress_threshold=100 # ms
 
 Button.pressed_time = None
 
