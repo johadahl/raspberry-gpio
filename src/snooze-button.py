@@ -1,6 +1,7 @@
 # import requests
 from gpiozero import Button
 from datetime import datetime, timedelta
+from signal import pause
 # from src import settings
 
 # ROOT_URL = settings.HOST_URL
@@ -25,6 +26,7 @@ def pressed(btn):
 
 btn = Button(GPIO_PIN)
 btn.when_pressed = pressed
+pause()
 
 # while True:
 #     time.sleep(0.2)
