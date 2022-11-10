@@ -11,9 +11,6 @@ GPIO_PIN = 2
 Button.pressed_time = None
 
 def pressed(btn):
-    if datetime.now() > btn.pressed_time + timedelta(milliseconds=THRESHOLD):
-        print('pressed once before, resetting')
-        btn.pressed_time = None
     if btn.pressed_time:
         if btn.pressed_time + timedelta(milliseconds=THRESHOLD) > datetime.now():
             print("pressed twice")
