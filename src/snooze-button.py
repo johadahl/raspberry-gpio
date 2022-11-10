@@ -1,26 +1,26 @@
 # import requests
 from gpiozero import Button
-from datetime import datetime, timedelta
 from signal import pause
+from time import sleep
 # from src import settings
 
 # ROOT_URL = settings.HOST_URL
-THRESHOLD = 600 #ms
+THRESHOLD = 0.6 # seconds
 GPIO_PIN = 2
 
-Button.pressed_time = None
-
 def pressed(btn):
-    pressed = datetime.now()
-    if btn.wait_for_release(timeout=0.6):
-        timeout = pressed - datetime.now()
-        if btn.wait_for_press(timeout=0.6):
-            print("pressed twice")
-        else:
-            print("pressed once")
+    sleep(3)
+    if btn.is_pressed == False:
+        print("pressed")
+
+def held(btn):
+    print("held")
 
 btn = Button(GPIO_PIN)
+btn.hold_time = THRESHOLD
+
 btn.when_pressed = pressed
+btn.when_held = held
 pause()
 
 # while True:
