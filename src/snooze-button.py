@@ -11,15 +11,13 @@ GPIO_PIN = 2
 Button.pressed_time = None
 
 def pressed(btn):
-    if btn.pressed_time:
-        if btn.pressed_time + timedelta(milliseconds=THRESHOLD) > datetime.now():
+    pressed = datetime.now()
+    if btn.wait_for_release(timeout=0.6):
+        timeout = pressed - datetime.now()
+        if btn.wait_for_press(timeout=0.6):
             print("pressed twice")
         else:
-            print("too slow") # debug
-        btn.pressed_time = None
-    else:
-        print("pressed once")  # debug
-        btn.pressed_time = datetime.now()
+            print("pressed once")
 
 btn = Button(GPIO_PIN)
 btn.when_pressed = pressed
