@@ -3,15 +3,18 @@ from gpiozero import Button
 from datetime import datetime, timedelta
 # from src import settings
 
-# root_url = settings.HOST_URL
-# button_gpio_pin=18
-# longpress_threshold=100 # ms
+# ROOT_URL = settings.HOST_URL
+THRESHOLD = 600 #ms
+GPIO_PIN = 2
 
 Button.pressed_time = None
 
 def pressed(btn):
+    if datetime.now() > btn.pressed_time + timedelta(milliseconds=THRESHOLD):
+        print('pressed once before, resetting')
+        btn.pressed_time = None
     if btn.pressed_time:
-        if btn.pressed_time + timedelta(seconds=0.6) > datetime.now():
+        if btn.pressed_time + timedelta(milliseconds=THRESHOLD) > datetime.now():
             print("pressed twice")
         else:
             print("too slow") # debug
@@ -20,7 +23,7 @@ def pressed(btn):
         print("pressed once")  # debug
         btn.pressed_time = datetime.now()
 
-btn = Button(3)
+btn = Button(GPIO_PIN)
 btn.when_pressed = pressed
 
 # while True:

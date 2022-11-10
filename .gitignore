@@ -66,5 +66,4 @@ venv.bak/
 .dmypy.json
 dmypy.json
 
-# Repository
-sql_app.db
+.DS_Store
