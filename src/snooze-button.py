@@ -1,20 +1,22 @@
-import requests
-from gpiozero import Button
 from signal import pause
 from time import sleep
+
+import requests
+from gpiozero import Button
+
 # from src import settings
 
 # ROOT_URL = settings.HOST_URL
 THRESHOLD = 0.6 # seconds
 GPIO_PIN = 2
 
-async def pressed(btn):
+def pressed(btn):
     sleep(3)
     if btn.is_pressed == False:
         print("pressed")
-        await requests.put('192.168.0.105:5001/v1/ring')
+        requests.put('http://192.168.0.105:5001/v1/ring')
 
-async def held(btn):
+def held(btn):
     print("held")
 
 btn = Button(GPIO_PIN)
