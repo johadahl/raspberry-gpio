@@ -6,11 +6,11 @@ FROM python:3.9-slim-bullseye
 ENV PYTHONWRITEBYTECODE 1
 ENV PYTHONBUFFERED 1
 
+# installs missing dependencies
+RUN apt-get update && apt-get install -y gcc libffi-dev g++
+
 # set working directory
 WORKDIR /src
-
-# installs missing dependencies
-#RUN apt-get update && apt-get install -y gcc libffi-dev g++
 
 # copy dependencies
 COPY requirements.txt /src/
@@ -19,4 +19,6 @@ COPY requirements.txt /src/
 RUN pip install -r requirements.txt
 
 # copy project
-COPY . /src/
+COPY . .
+
+CMD ["python", "src/snooze-button.py"]
