@@ -14,10 +14,11 @@ def pressed(btn):
     sleep(3)
     if btn.is_pressed == False:
         print("pressed")
-        requests.put('http://192.168.0.105:5001/v1/ring')
+        requests.patch('http://192.168.0.105:5001/v1/alarm/1?snooze=true')
 
 def held(btn):
     print("held")
+    requests.patch('http://192.168.0.105:5001/v1/alarm/1?reset=true')
 
 btn = Button(GPIO_PIN)
 btn.hold_time = THRESHOLD
